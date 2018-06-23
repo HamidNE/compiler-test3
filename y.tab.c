@@ -417,18 +417,18 @@ YY_parse_CONSTRUCTOR_CODE;
  #line 352 "/usr/share/bison++/bison.cc"
 
 
-#define	YYFINAL		16
+#define	YYFINAL		20
 #define	YYFLAG		-32768
-#define	YYNTBASE	9
+#define	YYNTBASE	10
 
-#define YYTRANSLATE(x) ((unsigned)(x) <= 258 ? yytranslate[x] : 13)
+#define YYTRANSLATE(x) ((unsigned)(x) <= 258 ? yytranslate[x] : 14)
 
 static const char yytranslate[] = {     0,
      2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
      2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
      2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-     2,     2,     2,     2,     2,     2,     2,     2,     2,     6,
-     7,     5,     4,     2,     8,     2,     2,     2,     2,     2,
+     2,     2,     2,     2,     2,     2,     2,     2,     2,     8,
+     9,     6,     4,     2,     5,     2,     7,     2,     2,     2,
      2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
      2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
      2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
@@ -454,65 +454,65 @@ static const char yytranslate[] = {     0,
 
 #if YY_parse_DEBUG != 0
 static const short yyprhs[] = {     0,
-     0,     2,     6,     8,    12,    14,    18,    21
+     0,     2,     6,    10,    12,    16,    20,    22,    26,    29
 };
 
-static const short yyrhs[] = {    10,
-     0,    10,     4,    11,     0,    11,     0,    11,     5,    12,
-     0,    12,     0,     6,    10,     7,     0,     8,    12,     0,
-     3,     0
+static const short yyrhs[] = {    11,
+     0,    11,     4,    12,     0,    11,     5,    12,     0,    12,
+     0,    12,     6,    13,     0,    12,     7,    13,     0,    13,
+     0,     8,    11,     9,     0,     5,    13,     0,     3,     0
 };
 
 #endif
 
 #if (YY_parse_DEBUG != 0) || defined(YY_parse_ERROR_VERBOSE) 
 static const short yyrline[] = { 0,
-     9,    11,    11,    13,    13,    15,    15,    15
+    10,    12,    12,    12,    14,    14,    14,    16,    16,    16
 };
 
 static const char * const yytname[] = {   "$","error","$illegal.","NUM","'+'",
-"'*'","'('","')'","'-'","S","E","T","F",""
+"'-'","'*'","'/'","'('","')'","S","E","T","F",""
 };
 #endif
 
 static const short yyr1[] = {     0,
-     9,    10,    10,    11,    11,    12,    12,    12
+    10,    11,    11,    11,    12,    12,    12,    13,    13,    13
 };
 
 static const short yyr2[] = {     0,
-     1,     3,     1,     3,     1,     3,     2,     1
+     1,     3,     3,     1,     3,     3,     1,     3,     2,     1
 };
 
 static const short yydefact[] = {     0,
-     8,     0,     0,     1,     3,     5,     0,     7,     0,     0,
-     6,     2,     4,     0,     0,     0
+    10,     0,     0,     1,     4,     7,     9,     0,     0,     0,
+     0,     0,     8,     2,     3,     5,     6,     0,     0,     0
 };
 
-static const short yydefgoto[] = {    14,
+static const short yydefgoto[] = {    18,
      4,     5,     6
 };
 
-static const short yypact[] = {    -2,
--32768,    -2,    -2,    -1,     4,-32768,     1,-32768,    -2,    -2,
--32768,     4,-32768,     2,    10,-32768
+static const short yypact[] = {    -1,
+-32768,    -1,    -1,     1,     8,-32768,-32768,     7,    -1,    -1,
+    -1,    -1,-32768,     8,     8,-32768,-32768,     3,    13,-32768
 };
 
 static const short yypgoto[] = {-32768,
-     9,     3,    -3
+     5,     9,    -2
 };
 
 
-#define	YYLAST		12
+#define	YYLAST		19
 
 
-static const short yytable[] = {     8,
-     1,    15,     9,     2,     9,     3,    13,    11,    10,    16,
-     7,    12
+static const short yytable[] = {     7,
+     0,     1,    19,     2,     9,    10,     3,     8,    16,    17,
+     9,    10,    20,    11,    12,    13,     0,    14,    15
 };
 
-static const short yycheck[] = {     3,
-     3,     0,     4,     6,     4,     8,    10,     7,     5,     0,
-     2,     9
+static const short yycheck[] = {     2,
+    -1,     3,     0,     5,     4,     5,     8,     3,    11,    12,
+     4,     5,     0,     6,     7,     9,    -1,     9,    10
 };
 
 #line 352 "/usr/share/bison++/bison.cc"
@@ -1212,4 +1212,4 @@ YYLABEL(yyerrhandle)
 /* END */
 
  #line 1038 "/usr/share/bison++/bison.cc"
-#line 17 "compiler.y"
+#line 18 "compiler.y"
