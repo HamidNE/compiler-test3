@@ -1,4 +1,6 @@
-%
+%union {
+    float f;
+}
 
 %token NUM
 

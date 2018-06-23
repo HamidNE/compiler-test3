@@ -99,6 +99,15 @@ Maintained by Magnus Ekdahl <magnus@debian.org>
 
  #line 88 "/usr/share/bison++/bison.cc"
 
+#line 1 "compiler.y"
+typedef union {
+    float f;
+} yy_parse_stype;
+#define YY_parse_STYPE yy_parse_stype
+#ifndef YY_USE_CLASS
+#define YYSTYPE yy_parse_stype
+#endif
+
 #line 88 "/usr/share/bison++/bison.cc"
 /* %{ and %header{ and %union, during decl */
 #define YY_parse_BISON 1
@@ -152,12 +161,6 @@ Maintained by Magnus Ekdahl <magnus@debian.org>
 /* section apres lecture def, avant lecture grammaire S2 */
 
  #line 134 "/usr/share/bison++/bison.cc"
-#ifndef YY_USE_CLASS
-# ifndef YYSTYPE
-#  define YYSTYPE int
-#  define YYSTYPE_IS_TRIVIAL 1
-# endif
-#endif
 
 #line 134 "/usr/share/bison++/bison.cc"
 /* prefix */
@@ -464,7 +467,7 @@ static const short yyrhs[] = {    10,
 
 #if (YY_parse_DEBUG != 0) || defined(YY_parse_ERROR_VERBOSE) 
 static const short yyrline[] = { 0,
-     5,     7,     7,     9,     9,    11,    11,    11
+     9,    11,    11,    13,    13,    15,    15,    15
 };
 
 static const char * const yytname[] = {   "$","error","$illegal.","NUM","'+'",
@@ -1209,4 +1212,4 @@ YYLABEL(yyerrhandle)
 /* END */
 
  #line 1038 "/usr/share/bison++/bison.cc"
-#line 13 "compiler.y"
+#line 17 "compiler.y"
