@@ -98,8 +98,14 @@ Maintained by Magnus Ekdahl <magnus@debian.org>
 #define YYBISON 1  
 
  #line 88 "/usr/share/bison++/bison.cc"
-
 #line 1 "compiler.y"
+
+    #include <stdio.h>
+    #include <stdlib.h>
+
+    extern int yylex();
+
+#line 8 "compiler.y"
 typedef union {
     float f;
 } yy_parse_stype;
@@ -467,7 +473,7 @@ static const short yyrhs[] = {    11,
 
 #if (YY_parse_DEBUG != 0) || defined(YY_parse_ERROR_VERBOSE) 
 static const short yyrline[] = { 0,
-    10,    12,    12,    12,    14,    14,    14,    16,    16,    16
+    17,    20,    21,    22,    25,    26,    27,    30,    31,    32
 };
 
 static const char * const yytname[] = {   "$","error","$illegal.","NUM","'+'",
@@ -1008,6 +1014,38 @@ YYLABEL(yyreduce)
 
   switch (yyn) {
 
+case 1:
+#line 17 "compiler.y"
+{ printf("%f\n", yyvsp[0].f); ;
+    break;}
+case 2:
+#line 20 "compiler.y"
+{ yyval.f = yyvsp[-2].f + yyvsp[0].f; ;
+    break;}
+case 3:
+#line 21 "compiler.y"
+{ yyval.f = yyvsp[-2].f - yyvsp[0].f; ;
+    break;}
+case 5:
+#line 25 "compiler.y"
+{ yyval.f = yyvsp[-2].f * yyvsp[0].f; ;
+    break;}
+case 6:
+#line 26 "compiler.y"
+{ yyval.f = yyvsp[-2].f / yyvsp[0].f; ;
+    break;}
+case 8:
+#line 30 "compiler.y"
+{ yyval.f = yyvsp[-1].f; ;
+    break;}
+case 9:
+#line 31 "compiler.y"
+{ yyval.f = -yyvsp[0].f; ;
+    break;}
+case 10:
+#line 32 "compiler.y"
+{ yyval.f = yyvsp[0].f; ;
+    break;}
 }
 
 #line 839 "/usr/share/bison++/bison.cc"
@@ -1212,4 +1250,15 @@ YYLABEL(yyerrhandle)
 /* END */
 
  #line 1038 "/usr/share/bison++/bison.cc"
-#line 18 "compiler.y"
+#line 35 "compiler.y"
+
+
+void yyerror(char *msg) {
+    fprintf(stderr, "%s\n", msg);
+    exit(1);
+}
+
+int main() {
+    yyparse();
+    return 0;
+}
