@@ -13,7 +13,7 @@
 
  #line 8 "/usr/share/bison++/bison.h"
 
-#line 8 "compiler.y"
+#line 10 "compiler.y"
 typedef union {
     float f;
 } yy_parse_stype;
