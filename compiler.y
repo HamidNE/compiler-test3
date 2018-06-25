@@ -1,9 +1,10 @@
 %{
-#include <stdio.h>
-#include <stdlib.h>
 
-extern int yylex();
-void yyerror(char *msg);
+  #include <stdio.h>
+  #include <stdlib.h>
+
+  extern int yylex();
+  void yyerror(char *msg);
 
 %}
 
@@ -16,7 +17,7 @@ void yyerror(char *msg);
 
 %%
 
-S : E           { printf("%f\n", $1); }
+S : E           { printf("Hi"); }
   ;
 
 E : E '+' T     { $$ = $1 + $3; }
