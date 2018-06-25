@@ -17,7 +17,7 @@
 
 %%
 
-S : E           { printf("Hi"); }
+S : E           { printf("%f\n", $1); }
   ;
 
 E : E '+' T     { $$ = $1 + $3; }
@@ -38,11 +38,11 @@ F : '(' E ')'   { $$ = $2; }
 %%
 
 void yyerror(char *msg) {
-    fprintf(stderr, "%s\n", msg);
-    exit(1);
+  fprintf(stderr, "%s\n", msg);
+  exit(1);
 }
 
 int main() {
-    yyparse();
-    return 0;
+  yyparse();
+  return 0;
 }
