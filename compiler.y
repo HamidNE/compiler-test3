@@ -9,11 +9,13 @@
 %}
 
 %union {
-    float f;
+  int INTGR;
+  float FLT;
+  char *STRNG;
 }
 
-%token <f> NUM
-%type <f> E T F
+%token <INTGR> NUM
+%type <INTGR> E T F
 
 %%
 
