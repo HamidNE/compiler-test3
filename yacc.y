@@ -53,7 +53,7 @@ int variable_initialized[26];
 int type[26];
 %}
 // definitions
-%union {int INTGR; char * STRNG; float FLT; char CHR;} 
+%union {int INTGR; char * STRNG; float FLT; char CHR;}
 %start statement
 %token IF ELSE ELSEIF FOR WHILE SWITCH CASE DO BREAK DEFAULT
 %token TYPE_INT TYPE_FLT TYPE_STR TYPE_CHR TYPE_CONST show_symbol_table
@@ -265,7 +265,6 @@ int main(void)
 {
 	return yyparse();
 }
-
 void print_symbol_table()
 {
 	printf("Symbol Table:\n=============\n");
@@ -285,7 +284,6 @@ void print_symbol_table()
 		}
 	}
 }
-
 char * get_type(int type){
 	if(type == 1)
 		return "int";
@@ -294,7 +292,6 @@ char * get_type(int type){
 	if(type == 3)
 		return "char";
 }
-
 void calc_lowp (char * op) {
 	/*$$ = $1 + $3;*/
 	if(is_first){
@@ -337,7 +334,6 @@ void cond_highp (char * op) {
 		printf("%s R14,R%d,R%d\n", op, --next_reg, --next_reg );
 	}
 }
-
 void switch_test () {
 	if(is_first){
 		printf("CMPE R10,RS,R%d\n", --next_reg );
@@ -354,7 +350,6 @@ void switch_test () {
 		printf("JF R10,label%d%c\n",nesting_arr[nesting_last_index],'a'-1+next_case);
 		reset();
 }
-
 void declare_only(int id,int type_)
 {
 	if(declared[id] == 0) {
@@ -367,7 +362,6 @@ void declare_only(int id,int type_)
 		printf("Syntax Error : %c is an already declared variable\n", id + 'a');
 	}
 }
-
 void assign_only(int id){
 	if(declared[id] == 1) {
 		if (is_constant[id] == 0) {
@@ -388,16 +382,16 @@ void assign_only(int id){
 	}
 }
 
-void switch_expr() {
-	if(is_first) {
+void switch_expr(){
+	if(is_first){
 		printf("MOV RS,R%d\n",--next_reg);
-	} else {
-		if(after_hp)
-			printf("MOV RS,R4\n");
-		else
-			printf("MOV RS,R0\n");
+		}else{
+			if(after_hp)
+				printf("MOV RS,R4\n");
+			else
+				printf("MOV RS,R0\n");
+		}
 	}
-}
 
 void declare_const(int id, int _type)
 {
@@ -419,7 +413,6 @@ void declare_const(int id, int _type)
 		printf("Syntax Error : %c is an already declared variable\n", id + 'a');
 	}
 }
-
 void declare_initalize(int id, int _type){
 	if(declared[id] == 0) {
 		declared[id] = 1;
@@ -439,7 +432,6 @@ void declare_initalize(int id, int _type){
 		printf("Syntax Error : %c is an already declared variable\n", id + 'a');
 	}
 }
-
 void reset()
 {
 	next_reg = 1;
@@ -449,13 +441,11 @@ void reset()
 	after_hp_cond = 0;
 	printf("\n");
 }
-
 int yyerror(char* s)
 {
   fprintf(stderr, "%s\n",s);
   return 1;
 }
-
 int yywrap()
 {
   return(1);
@@ -475,6 +465,7 @@ void close_brace () {
 	cscope--;
 }
 
+
 int new_scope()
 {
 	opened_scopes ++;
@@ -482,7 +473,6 @@ int new_scope()
 	nesting_arr[nesting_last_index] = opened_scopes;
 	return opened_scopes;
 }
-
 int exit_scope()
 {
 	int tmp = nesting_arr[nesting_last_index];
