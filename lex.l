@@ -19,14 +19,30 @@ ALNUM [0-9a-zA-Z]
 
 %%
 "if"		return(IF);
-"do"		return(DO);
+"to"		return(TO);
+"of"		return(OF);
 "for"		return(FOR);
+"down"		return(DOWN);
 "else"		return(ELSE);
+"then"		return(THEN);
 "case"		return(CASE);
 "while"		return(WHILE);
 "break"		return(BREAK);
-"default"	return(DEFAULT);
+"repeat"	return(REPEAT);
 "switch"	return(SWITCH);
+"continue"	return(CONTINUE);
+
+
+"read"		return(READ);
+"true"		return(TRUE);
+"false"		return(FALSE);
+"write"		return(WRITE);
+"return"	return(RETURN);
+"program"	return(PROGRAM);
+
+
+"do"		return(DO);
+"default"	return(DEFAULT);
 
 [*+-/=%;~&|^(){}:]  {return yytext[0];}
 
@@ -44,10 +60,12 @@ ALNUM [0-9a-zA-Z]
 
 
 "int"			return TYPE_INT;
-"float"			return TYPE_FLT;
-"double"		return TYPE_DBL;
-"string"  		return TYPE_STR;
+"bool"			return TYPE_BOL;
 "char"			return TYPE_CHR;
+"double"		return TYPE_DBL;
+
+"float"			return TYPE_FLT;
+"string"  		return TYPE_STR;
 "const"   		return TYPE_CONST;
 "exit"			return exit_command;
 "symbol_table" 	return show_symbol_table;
