@@ -53,16 +53,20 @@ int variable_initialized[26];
 int type[26];
 %}
 // definitions
-%union {int INTGR; char * STRNG; float FLT; char CHR;}
+%union {
+	char CHR;
+	int INTGR;
+	double DBL;
+	char * STRNG;
+}
 %start statement
 %token IF ELSE ELSEIF FOR WHILE SWITCH CASE DO BREAK DEFAULT
-%token TYPE_INT TYPE_FLT TYPE_STR TYPE_CHR TYPE_CONST show_symbol_table
+%token TYPE_INT TYPE_DBL TYPE_STR TYPE_CHR TYPE_CONST show_symbol_table
 %token <INTGR> ID
 %token <INTGR> NUM
-%token <FLT> FLOATING_NUM
+%token <DBL> DOUBLING_NUM
 %token <CHR> CHAR_VALUE
 %token <STRNG> STRING_VALUE
-%token exit_command
 %type <INTGR> math_expr
 %type <INTGR> high_priority_expr
 %type <INTGR> math_element
@@ -80,14 +84,12 @@ statement	: variable_declaration_statement ';' {reset();}
 			| constant_declaration_statement ';' {reset();}
 			| conditional_statement {reset();}
 			| math_expr ';' {reset();}
-			| exit_command ';' {exit(EXIT_SUCCESS);}
 			| show_symbol_table ';' {print_symbol_table();}
 			| statement variable_declaration_statement ';' {reset();}
 			| statement assign_statement ';' {reset();}
 			| statement constant_declaration_statement ';' {reset();}
 			| statement conditional_statement {reset();}
 			| statement math_expr ';' {reset();}
-			| statement exit_command ';' {exit(EXIT_SUCCESS);}
 			| open_brace statement close_brace statement {;}
 			| statement open_brace statement close_brace {;}
 			| statement show_symbol_table ';' {print_symbol_table();}
@@ -192,7 +194,7 @@ high_priority_expr:		high_priority_expr '*' math_element		{ calc_highp("MUL"); }
 //TODO: ID type check
 math_element:	NUM			  				{$$=$1;
 																printf("MOV R%d, %d\n",next_reg++ ,$1);}
-				| FLOATING_NUM					{$$=$1;
+				| DOUBLING_NUM					{$$=$1;
 																printf("MOV R%d, %f\n",next_reg++,$1);}
 				| ID 										{$$=$1;
 																	if(declared[$1] == 1){
@@ -214,10 +216,10 @@ assign_statement:
 
 variable_declaration_statement:
 	TYPE_INT ID 	{ 	declare_only($2,1);}
-	|TYPE_FLT ID	{ 	declare_only($2,2);}
+	|TYPE_DBL ID	{ 	declare_only($2,2);}
 	|TYPE_CHR ID	{ 	declare_only($2,3);}
 	|TYPE_INT ID '=' math_expr	{ 	declare_initalize($2,1);}
-	|TYPE_FLT ID '=' math_expr	{ 	declare_initalize($2,2);}
+	|TYPE_DBL ID '=' math_expr	{ 	declare_initalize($2,2);}
 	|TYPE_CHR ID '=' CHAR_VALUE	{if(declared[$2] == 0) {
 																	declared[$2] = 1;
 																	type[$2] = 3;
@@ -230,7 +232,7 @@ variable_declaration_statement:
 																	printf("Syntax Error : %c is an already declared variable\n", $2 + 'a');
 																}
 															}
-		|TYPE_CHR ID '=' FLOATING_NUM { printf("Syntax Error : char can not be assigned a floating number\n");}
+		|TYPE_CHR ID '=' DOUBLING_NUM { printf("Syntax Error : char can not be assigned a floating number\n");}
 	;
 
 open_brace: '{' { open_brace(); } ;
@@ -241,7 +243,7 @@ constant_declaration_statement:
 	TYPE_CONST TYPE_INT ID '=' math_expr			{ 	declare_const($3,1);
 																						}
 
-	| TYPE_CONST TYPE_FLT ID '=' math_expr		{ 	declare_const($3,2);
+	| TYPE_CONST TYPE_DBL ID '=' math_expr		{ 	declare_const($3,2);
 																						}
 	| TYPE_CONST TYPE_CHR ID '=' CHAR_VALUE			{
 																								if(declared[$3] == 0) {

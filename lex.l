@@ -18,6 +18,7 @@ ALPHA_CAPITAL [A-Z]
 ALNUM [0-9a-zA-Z]
 
 %%
+
 "if"		return(IF);
 "to"		return(TO);
 "of"		return(OF);
@@ -33,6 +34,8 @@ ALNUM [0-9a-zA-Z]
 "continue"	return(CONTINUE);
 
 
+"in"		return(IN);
+"end"		return(END);
 "read"		return(READ);
 "true"		return(TRUE);
 "false"		return(FALSE);
@@ -40,11 +43,6 @@ ALNUM [0-9a-zA-Z]
 "return"	return(RETURN);
 "program"	return(PROGRAM);
 
-
-"do"		return(DO);
-"default"	return(DEFAULT);
-
-[*+-/=%;~&|^(){}:]  {return yytext[0];}
 
 "&&"		return(AND);
 "||"		return(OR);
@@ -63,17 +61,22 @@ ALNUM [0-9a-zA-Z]
 "bool"			return TYPE_BOL;
 "char"			return TYPE_CHR;
 "double"		return TYPE_DBL;
+"string"  		return TYPE_STR;
+
+
+"do"		return(DO);
+"default"	return(DEFAULT);
+
+[*+-/=%;~&|^(){}:]  {return yytext[0];}
 
 "float"			return TYPE_FLT;
-"string"  		return TYPE_STR;
 "const"   		return TYPE_CONST;
-"exit"			return exit_command;
 "symbol_table" 	return show_symbol_table;
 
 [ \t\n]+        ;       /* ignore whitespace */
 
-\-?{DIGIT}*"."{DIGIT}+      {	yylval.FLT = atof(yytext);
-								return FLOATING_NUM;}
+\-?{DIGIT}*"."{DIGIT}+      {	yylval.DBL = atof(yytext);
+								return DOUBLING_NUM;}
 \-?{DIGIT}+				 	{	yylval.INTGR = atoi(yytext);
 								return NUM;}
 \'.\'						{ 	yylval.INTGR = yytext[1]-'a';
